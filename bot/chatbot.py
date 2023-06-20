@@ -1,29 +1,21 @@
-import pandas as pd
-from ast import literal_eval
+import openai
 
-from cdqa.utils.filters import filter_paragraphs
-from cdqa.utils.download import download_model, download_bnpp_data
-from cdqa.pipeline.cdqa_sklearn import QAPipeline
+# Set up the OpenAI API client
+openai.api_key = "YOUR_API_KEY"
 
-# Download data and models
-download_bnpp_data(dir='./data/bnpp_newsroom_v1.1/')
-download_model(model='bert-squad_1.1', dir='./models')
+# Set up the model and prompt
+model_engine = "text-davinci-003"
+prompt = "Hello, how are you today?"
 
-# Loading data and filtering / preprocessing the documents
-df = pd.read_csv('data/bnpp_newsroom_v1.1/bnpp_newsroom-v1.1.csv', converters={'paragraphs': literal_eval})
-df = filter_paragraphs(df)
+# Generate a response
+completion = openai.Completion.create(
+    engine=model_engine,
+    prompt=prompt,
+    max_tokens=1024,
+    n=1,
+    stop=None,
+    temperature=0.5,
+)
 
-# Loading QAPipeline with CPU version of BERT Reader pretrained on SQuAD 1.1
-cdqa_pipeline = QAPipeline(reader='models/bert_qa_vCPU-sklearn.joblib')
-
-# Fitting the retriever to the list of documents in the dataframe
-cdqa_pipeline.fit_retriever(X=df)
-
-# Sending a question to the pipeline and getting prediction
-query = input('Enter a question:')
-prediction = cdqa_pipeline.predict(X=query)
-
-print('query: {}\n'.format(query))
-print('answer: {}\n'.format(prediction[0]))
-print('title: {}\n'.format(prediction[1]))
-print('paragraph: {}\n'.format(prediction[2]))
+response = completion.choices[0].text
+print(response)
