@@ -53,6 +53,12 @@ cd sci-fair-project
 <instructions>
 ```
 
+## Important Note:
+Download the training data files for the ML from the drive link below:
+
+
+https://drive.google.com/drive/folders/1ohq0rqFA-6Ku_h25eiOtYdfPjv_qLLsE?usp=sharing
+
 ## Contributing
 
 Contributions to the Sci-Fair Project are welcome! If you would like to contribute to the project, please follow these guidelines:
