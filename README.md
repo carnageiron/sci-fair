@@ -81,3 +81,4 @@ The Sci-Fair Project is distributed under the [MIT License](LICENSE). You can fi
 
 Inspired by:
 https://towardsdatascience.com/how-can-ai-help-to-prevent-cyberbullying-f630073da478
+https://beebom.com/how-build-own-ai-chatbot-with-chatgpt-api/
